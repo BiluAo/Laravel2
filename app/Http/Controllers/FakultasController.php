@@ -12,7 +12,8 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        return view ('fakultas.list-fakultas');
+        $data = fakultas::orderByDesc("created_at")->get();
+        return view('fakultas.list-fakultas', ['fakultas' => $data,]);
     }
 
     /**
@@ -20,7 +21,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view ('fakultas.add-fakultas');
+        return view('fakultas.add-fakultas');
     }
 
     /**
@@ -28,7 +29,11 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Fakultas::create([
+            'nama_fakultas' => $request->nama_fakultas,
+            'nama_dekan' => $request->nama_dekan
+        ]);
+        return redirect('/fakultas');
     }
 
     /**
@@ -42,9 +47,11 @@ class FakultasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Fakultas $fakultas)
+    public function edit(Fakultas $fakulta)
     {
-        //
+        return view('fakultas.edit-fakultas',[
+            'fakultas'=> $fakulta
+        ]);
     }
 
     /**
@@ -58,8 +65,10 @@ class FakultasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fakultas $fakultas)
+    public function destroy(Fakultas $fakulta)
     {
-        //
+        $fakulta->delete();
+
+        return redirect()->back();
     }
 }
