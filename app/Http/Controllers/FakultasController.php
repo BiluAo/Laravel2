@@ -39,9 +39,9 @@ class FakultasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Fakultas $fakultas)
+    public function show(Fakultas $fakulta)
     {
-        //
+        return view('fakultas.detail-fakultas', ['fakultas'=> $fakulta]);
     }
 
     /**
@@ -57,9 +57,13 @@ class FakultasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fakultas $fakultas)
+    public function update(Request $request, Fakultas $fakulta)
     {
-        //
+        $fakulta->update([
+            'nama_fakultas'=>$request->nama_fakultas,
+            'nama_dekan'=>$request->nama_dekan
+        ]);
+        return redirect('/fakultas');
     }
 
     /**

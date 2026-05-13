@@ -1,5 +1,5 @@
 <x-layout>
-    <form action="/fakultas" method="POST">
+    <form action="/fakultas/{{ $fakultas->id }}" method="POST">
         @csrf
         @method("PUT")
         <div class="form-group">
