@@ -65,6 +65,11 @@
     }
 </style>
   <main>
+    @if (session('success'))
+    <div class="alert alert-success">
+      {{ session('sucess') }}
+    </div>
+    @endif
     {{$slot}}
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       ntegrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
