@@ -29,6 +29,17 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+        'nama_fakultas'=>['required',"max:5"],
+        'nama_dekan' => ['required',"max:5"]
+        ],[
+            'nama_fakultas.required' => 'Nama Fakultas Wajib Di Isi',
+            'nama_dekan.required' => 'Nama Dekan Wajib Di Isi',
+            'nama_fakultas.max' => 'Nama Fakultas Maksimal 5 Karakter',
+            'nama_dekan.max' => 'Nama Dekan Maksimal 5 Karakter',
+            
+        ]);
+
         Fakultas::create([
             'nama_fakultas' => $request->nama_fakultas,
             'nama_dekan' => $request->nama_dekan
@@ -59,6 +70,18 @@ class FakultasController extends Controller
      */
     public function update(Request $request, Fakultas $fakulta)
     {
+
+        $validated = $request->validate([
+        'nama_fakultas'=>['required',"max:5"],
+        'nama_dekan' => ['required',"max:5"]
+        ],[
+            'nama_fakultas.required' => 'Nama Fakultas Wajib Di Isi',
+            'nama_dekan.required' => 'Nama Dekan Wajib Di Isi',
+            'nama_fakultas.max' => 'Nama Fakultas Maksimal 5 Karakter',
+            'nama_dekan.max' => 'Nama Dekan Maksimal 5 Karakter',
+            
+        ]);
+
         $fakulta->update([
             'nama_fakultas'=>$request->nama_fakultas,
             'nama_dekan'=>$request->nama_dekan
