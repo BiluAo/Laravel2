@@ -7,6 +7,7 @@ use App\Models\Fakultas;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Storage;
 
 class ProdiController extends Controller
 {
@@ -24,11 +25,12 @@ class ProdiController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama_prodi' => 'required|string|max:100|unique:prodis',
             'nama_kaprodi' => 'required|string|max:100',
             'alias_prodi' => 'required|string|max:10|unique:prodis',
-            'fakultas_id' => 'required|exists:fakultas,id'
+            'fakultas_id' => 'required|exists:fakultas,id',
+            'photo_kaprodi' =>'required|image'
         ], [
             'nama_prodi.required' => 'Nama prodi wajib diisi!',
             'nama_prodi.unique' => 'Nama prodi sudah terdaftar!',
@@ -38,8 +40,12 @@ class ProdiController extends Controller
             'fakultas_id.required' => 'Fakultas wajib dipilih!'
         ]);
 
+        $photoKaprodi = Storage::disk("public")->putFile('prodi', $request->file('photo_kaprodi'));
+        $validated['photo_kaprodi']= $photoKaprodi;
+         Prodi::create($validated);
+
         try {
-            Prodi::create($request->all());
+            Prodi::create($validated);
             return redirect()->route('prodi.index')
                 ->with('success', 'Data prodi berhasil disimpan!');
         } catch (\Exception $e) {

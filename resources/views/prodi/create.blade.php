@@ -19,7 +19,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('prodi.store') }}" method="POST">
+                        <form action="{{ route('prodi.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
 
@@ -72,6 +72,17 @@
                                 @error('nama_kaprodi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="photo_kaprodi" class="form-label">Photo Kaprodi</label>
+                                <input 
+                                    type="file" 
+                                    name="photo_kaprodi" 
+                                    id="photo_kaprodi"
+                                    class="form-control 
+                                    accept="image/*"
+                                    placeholder="Pilih Photo Kaprodi"
                             </div>
 
                             <div class="d-flex gap-2 justify-content-end">

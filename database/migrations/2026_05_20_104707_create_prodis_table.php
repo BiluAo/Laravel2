@@ -14,7 +14,8 @@ return new class extends Migration
             $table->foreignIDFor(Fakultas::class)->constrained('fakultas');
             $table->string('nama_prodi', 100);
             $table->string('nama_kaprodi', 100);
-            $table->string('alias_prodi', 10);
+            $table->string('alias_prodi');
+            $table->string('photo_kaprodi');
             $table->timestamps();
         });
     }
