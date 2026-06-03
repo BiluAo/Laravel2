@@ -12,11 +12,11 @@ return new class extends Migration
         Schema::create('prodis', function (Blueprint $table) {
             $table->id();
             $table->foreignIDFor(Fakultas::class)->constrained('fakultas');
-            $table->string('nama_prodi', 100);
-            $table->string('nama_kaprodi', 100);
+            $table->string('nama_prodi');
+            $table->string('nama_kaprodi');
             $table->string('alias_prodi');
-            $table->string('photo_kaprodi');
-            $table->timestamps();
+            $table->string('photo_kaprodi')->nullable();
+            $table->timestamps();   
         });
     }
 
